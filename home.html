@@ -1,0 +1,65 @@
+﻿<div><script type="text/javascript" src="https://www.google.com/jsapi"/>
+    <script src="//code.jquery.com/jquery-1.10.2.js"/>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"/>
+
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script><script type="text/javascript">
+            google.load("visualization", "1", {packages:["geochart"]});
+            google.setOnLoadCallback(drawRegionsMap);
+
+
+            function drawRegionsMap() {
+            url="../ogcwxs/rest/map.php";
+            data={};            
+            $.getJSON(url, data, function(res){
+            var data = google.visualization.arrayToDataTable(res);
+            var options = {
+            colorAxis: {colors: ['#109618','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB','#78FFFF','#5C66FF','#FF20C7','#DFFFE7','#FFC44F','#EEE6DB']},
+            datalessRegionColor: '#ffffff',
+            legend:'none',
+            };
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+
+            chart.draw(data, options);
+            });
+            }
+    </script>
+    <div>
+            <h2>Project at the glance</h2>
+
+
+            <p align="justify">The effective access and use of geospatial information (GI) resources acquires a critical value of importance in modern knowledge based society. Standard web services defined by Open Geospatial Consortium (OGC) are frequently used within the implementations of spatial data infrastructure (SDI) to facilitate discovery and use of geospatial data. This data are stored in databases located in a layer, called the invisible web, thus are ignored by search engines. SDI uses a catalogue service for the web as a gateway to the GI world through the metadata defined by ISO standards, which are structurally diverse to OGC metadata. Therefore a crosswalk needs to be implemented to bridge the mainstream web with SDI to enrich its information extent. A public global wide and user friendly portal of OGC resources available on the web ensures and enhances the use of GI within a multidisciplinary context and bridges the geospatial web from the end-user perspective, thus opens its borders to everybody.</p>
+    </div>
+
+
+    <div>
+            <h2>Geographic distribution of the discovered OGC resources</h2>
+
+
+            <div id="regions_div" style="width: auto; height: 500px;">&nbsp;</div>
+    </div>
+
+
+<div>
+            <h2>Thematic distribution of the discovered OGC resources</h2>
+
+
+            <div id="regions_div" style="width: auto; height: 500px;">&nbsp;</div>
+    </div>
+
+
+
+
+    <div>
+            <center>
+                    <h2>Acknowledgements</h2>
+
+
+                    <p><i>The research leading to the results of the project has received funding from the European Union Seventh Framework Programme (FP7 2007-2013) under grant agreement n° 291823 Marie Curie FP7-PEOPLE-2011-COFUND (The new International Fellowship Mobility Programme for Experienced Researchers in Croatia - NEWFELPRO). This web space has been prepared as a part of a project "Bolegweb - Crosswalking the layers of geospatial information resources to enable a borderless geospatial web" which has received funding through NEWFELPRO project under grant agreement n° 3.</i></p>
+            </center>
+    </div>
+    <div align="center">
+            <p style="color:white">Hosted by "srce" University of Zagreb Computing Centre</p>
+    </div>
+</div>

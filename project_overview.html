@@ -1,0 +1,868 @@
+﻿<div>
+    <script>
+            $(function() {
+            $( "#tabs" ).tabs();
+            });
+            $(function () {
+                    var hash = $.trim( window.location.hash );
+                    if (hash) $('#tabs[href$="'+hash+'"]').trigger('click');
+            });
+    </script><script>
+            $("#page-title").hide();
+    </script>
+    <div id="tabs">
+            <ul>
+                    <li><a href="#background">Background and Focus</a></li>
+                    <li><a href="#objectives">Research Objectives</a></li>
+                    <li><a href="#results">Expected Results</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                    <li><a href="#architecture">System Architecture</a></li>
+                    <li><a href="#workplan">Workplan & Timetable</a></li>
+            </ul>
+
+
+            <div id="background">
+                    <p align="justify">The World-Wide-Web has geospatial extent and uses geospatial information (GI) asa positional reference of its content to Earth. The ability of users and providers to manage GI on the Internet forms the current shape of the Geospatial-Web, which can be defined as a collection of web services, geospatial data and metadata. Metadata facilitates discovery and retrieval of the geospatial data within the scope of application used in a specific area.</p>
+
+
+                    <p align="justify">Searching for specific information is an important function that should be supported by any information system. A level of efficiency in the process of GI retrieval gains a critical level of importance in the modern knowledge-based society in which the communication among the people is largely supported by information technologies.The basic approach to solve problems with success in various sectors is to have a simple access to GI-resources via the Internet. For the management of natural hazards, landscape planning, renewable energy or biodiversity an access to updated data available within the Geospatial-Web would mean the difference between success and failure in the context of solving a significant task for the enterprise, or answer research questions for science.</p>
+
+
+                    <p align="justify">Standard OGC (Open–Geospatial-Consortium) web services are widely used in building infrastructure for spatial information, as for instance a European Spatial Data Infrastructure (SDI) defined by the INSPIRE Directive, are part of a web layer called invisible web. Currently the term invisible web identifies part of the web, which is ignored by conventional search engines like Google, Yahoo and Bing. OGC-services provide different types of representation of GI-resources that are part of web’s layer called, deep web. The term deep refers to the way how to transfer these resources from the “deepness” to the surface into the group of data that can be easily discovered by search engines in a surface web layer. The fact that the content of Geospatial-Web is hardly discoverable on the Internet is resulting from its nature.Geospatial resources are hidden behind the interfaces of Geospatial-Web services that have their own specifics, thus publish GI on the web in a particular way. This Differs from the current, commonly used way of publishing resources available on the Internet. A final layout of the Geospatial-Web components and their positions in the web is shown in Figure below.</p>
+
+
+                    <p align="center"><figure style="float: right;"><img src="/site/sites/default/files/img/geoweb.png"/>
+                                    <figcaption>Geospatial-Web components and their positions in the web (Florczyk, 2012) </figcaption></figure></p>
+
+
+                    <p align="justify">Infrastructures for spatial information use discovery services defined by OGC implementation specification Catalogue Service for the Web (CSW). CSWs are a gateway to the world of GI, and at the same time a key technology for the discovery,retrieval and maintenance of distributed geospatial resources. With the catalogue service, remote clients are able to search for geospatial resources in a standardized way, and use spatial and thematic information encompassed in pre defined information models with high level efficiency. The high importance of standard CSW services is confirmed in the INSPIRE context in which the use of an ISO application profile of CSW services is recommended for the INSPIRE Discovery Services Interface within the technical guidelines. In order to search for OGC-web-services within the SDI is necessary to ensure that descriptive information, called metadata,are accessible through a CSW interface. However, OGC-web-services provide metadata in specific models based on a common metadata model defined in the implementation specification OGC Web Service Common. ISO application profile of the CSW service is based on the metadata model conceptually defined in the international standards ISO 19115:2003 Geographic information–Metadata,extended in ISO 19119:2005 Geographic information–Services And implemented using XML schema defined in ISO/TS 19139:2007 Geographic information-Metadata-Implementation specification. Since these assumptions do not match, it is necessary to ensure an automated transformation of the information contained in OGC models into relevant ISO model and to publish metadata into an SDI implementing CSW service. This would build a crosswalk between GI-resources discovered in the mainstream web and an SDI world, and will enrich and unify information extent and build a unique global SDI as is defined in its concept.</p>
+            </div>
+
+
+            <div id="objectives">
+                    <p align="justify">The main objective of the project is to design, develop and implement a complex solution for the discovery of GI resources from available web services defined by OGC standards on the Internet (OGC crawler); and to provide geospatial metadata according to current SDI standards. The main objective is based on the following sub-objectives:</p>
+
+
+                    <ul>
+                            <li align="justify">To design and develop sophisticated OGC crawler for automatic collection of OGC services endpoints and other GI resource types with all related resources available on the Internet. Furthermore Design and implementation of the testing processes will take into account the assessment of interfaces and quality parameters defined by INSPIRE network services regulation.</li>
+                            <li align="justify">To publish metadata describing both OGC-services and the content published (geographic layers, datasets, coverages, etc.) through implementation of an SDI catalogue, thus to extend an information coverage provided by SDI’s implementations at any level.</li>
+                            <li align="justify">To design and develop a user-friendly web application of a geoportal type implementing search facilities on resources provided by OGC-services available on theInternet.</li>
+                    </ul>
+            </div>
+
+
+            <div id="results">
+                    <p>The BOLEGWEB project is expected to deliver the following results at the end of it's duration:</p>
+
+
+                    <ul>
+                            <li align="justify">An open-source OGC resources crawler reporting the overall status of OGC resources availability on the mainstream web.</li>
+                            <li align="justify">INSPIRE discovery services for OGC resources available on the web.</li>
+                            <li align="justify">Methodologies For conformance testing of the OGC resources and automation of metadata workflows (crosswalks).</li>
+                            <li align="justify">Public global wide portal of GI resources with multidisciplinary purpose.</li>
+                    </ul>
+            </div>
+
+
+            <div id="methodology">
+                    <p>The project methodology consists of the following stages:</p>
+
+
+                    <ol>
+                            <li align="justify"><strong>Discovery of available OGC and other GI resources in mainstream search interfaces</strong><br />
+        In this stage the focus will be on design and develop application Geo-focused crawler,which will retrieve endpoints from OGC-services by searching specific URL addresses stored in indexes of search engines. The searched URL addresses will be links to various types of requests to standardized operations of the OGC-services invoked with GET method of HTTP protocol. To find these specific URLs, the requests will have to be defined using advanced querying operators. These operators may be specific for each searching interface. An example of a specific request structure for GetCapabilities URLs of WMS services in Google SE:<strong><em>inurl:service=WMS inurl:request=GetCapabilities.</em></strong>The query defined in such a way will be searching in Google index for records that have strings service=WMS and request=GetCapabilities in the field where the URL address is stored. Individual values of the filter “service” by the current types of OGC services and “request” with mandatory GetCapabilities operation for all current types of OGC service will be defined. Additionally mandatory and optional operations for individual OGC services will be used (e.g. WMS-GetMap, CSW-GetRecords, WFS GetFeature,SOS-Gets Observation).Initial results gained from processes described above will be stored in designed database structure, which will be afterwards used for further post-processing. Post Processing Will consist of (i) detecting the service version; (ii) extracting the descriptive information from the service response; (iii) evaluating the quality of service through the permanent testing of the service availability; (iiii) storing all relevant information in database. The database update process with new OGC-services will be configurable.</li>
+                            <li align="justify"><strong>Implementation of INSPIRE discovery service for metadata harvested from discovered resources</strong><br />
+        Within the second stage of the project design and implementation of automatic processes for transformation of descriptive information from specific fragments of the OGC-services GetCapabilities responses to INSPIRE metadata will be done. Since Both OGC and INSPIRE models are defined by XML schemes, one possible technology to be used is the Extensible Stylesheet Language Transformation. Before The actual implementation the mapping among OGC and INSPIRE models will need to be designed. This mapping consists of several steps like harmonization of models based on both conceptual and application schemes, semantic mapping and additional conversion rules. Metadata transformed to INSPIRE models will be validated taking into account scope and quality of the provided GI and then saved in database underneath the INSPIRE discovery service. The service will be implemented according to OGC CSW implementation specification and INSPIRE implementing rules for network services. The last step of this stage will be testing of INSPIRE discovery service to evaluate the compliance level with the INSPIRE requirements concerning service interface, its quality and metadata content. This service will provide an access point to metadata describing OGC resources for external catalogues (e.g. GeoNetwork opensource nodes, ESRI Geoportal CSW Clients for ArcGIS, INSPIRE Geoportal, etc.).</li>
+                            <li align="justify"><strong>Design and development of web based application(s) for the end-users.</strong><br />
+        A web-based client application will be designed and developed in order to provide a user friendly way to discover and use geospatial resources retrieved from the web.The application will allow users to search for OGC-services stored in the database and display descriptive information (e.g. provider, restrictions on access, etc.) about the service and its content (e.g. WMS service layers list with names and abstracts).Moreover the results of monitoring the quality of service will be provided. For the practical use of GI-resources available through the application further functionalities for data portrayal, download and transformations will be developed.</li>
+                    </ol>
+            </div>
+            <div id="architecture">
+                    <img src="/site/sites/default/files/img/smod_sk_architecture_enhanced_crawler.svg"/>
+            </div>
+
+
+            <div id="workplan">
+                    <style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg .tg-s6z2{text-align:center}
+            .tg .tg-b286{background-color:#f56b00}
+            .tg .tg-hgcj{font-weight:bold;text-align:center}
+                    </style>
+                    <table class="tg" style="undefined;table-layout: fixed; width: 100%">
+                            <colgroup>
+                                    <col style="width: 335px" />
+                                    <col style="width: 31px" />
+                                    <col style="width: 31px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 31px" />
+                                    <col style="width: 31px" />
+                                    <col style="width: 31px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 24px" />
+                                    <col style="width: 23px" />
+                                    <col style="width: 23px" />
+                                    <col style="width: 30px" />
+                            </colgroup>
+                            <tbody>
+                                    <tr>
+                                            <th class="tg-s6z2" rowspan="2">Activities</th>
+                                            <th class="tg-s6z2" colspan="2">2014</th>
+                                            <th class="tg-s6z2" colspan="12">2015</th>
+                                            <th class="tg-s6z2" colspan="10">2016</th>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-s6z2">11</td>
+                                            <td class="tg-s6z2">12</td>
+                                            <td class="tg-s6z2">1</td>
+                                            <td class="tg-s6z2">2</td>
+                                            <td class="tg-s6z2">3</td>
+                                            <td class="tg-s6z2">4</td>
+                                            <td class="tg-s6z2">5</td>
+                                            <td class="tg-s6z2">6</td>
+                                            <td class="tg-s6z2">7</td>
+                                            <td class="tg-s6z2">8</td>
+                                            <td class="tg-s6z2">9</td>
+                                            <td class="tg-s6z2">10</td>
+                                            <td class="tg-s6z2">11</td>
+                                            <td class="tg-s6z2">12</td>
+                                            <td class="tg-s6z2">1</td>
+                                            <td class="tg-s6z2">2</td>
+                                            <td class="tg-s6z2">3</td>
+                                            <td class="tg-s6z2">4</td>
+                                            <td class="tg-s6z2">5</td>
+                                            <td class="tg-s6z2">6</td>
+                                            <td class="tg-s6z2">7</td>
+                                            <td class="tg-s6z2">8</td>
+                                            <td class="tg-s6z2">9</td>
+                                            <td class="tg-s6z2">10</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">State of the Art I<br />
+                Overview of Open Source Crawlers available on<br />
+                the scene</td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">State of the Art II<br />
+                Overview of Current Standardized Interfaces for<br />
+                Geospatial Data Access</td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Preliminary analysis</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-hgcj" colspan="25">Development of the Geo-Focused Crawler System (backend)</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Concept<br />
+                Definition</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System,Requirements<br />
+                Analysis</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Design</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Development</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Integration and Tests</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Implementation</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Operation and<br />
+                Maintenance</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-hgcj" colspan="25">First release of the Geo-Crawlerpilot version – Milestone 1</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Mappings design for<br />
+                metadata harvested from Geospatial Data Access Services</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Mappings<br />
+                implementations</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">SDI catalogue and CSW<br />
+                implementation with underneath database populated with ISO metadata</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">System Integration and Tests</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-hgcj" colspan="25">First release of an SDI Geo-Catalogue pilotversion – Milestone 2</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Metadata<br />
+                validation</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Metadata<br />
+                analysis</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-hgcj" colspan="25">Development of the web based Geo-Client fordiscovery and use of Geospatial Information Resource collected by Geo-Crawler</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Geo-Client<br />
+                Design</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Geo-Client<br />
+                Development</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Geo-Client<br />
+                Implementation</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Operation and<br />
+                Maintenance</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-hgcj" colspan="25">First release of Geo-Client pilot version - Milestone3</td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Reports writing</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Conference papers<br />
+                preparation</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Publications<br />
+                preparation</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Trainings – knowledge<br />
+                transfer</td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-b286"></td>
+                                    </tr>
+                                    <tr>
+                                            <td class="tg-031e">Project Web Site<br />
+                Administration</td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                            <td class="tg-031e"></td>
+                                            <td class="tg-b286"></td>
+                                    </tr>
+                            </tbody>
+                    </table>
+            </div>
+    </div>
+</div>

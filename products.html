@@ -1,0 +1,203 @@
+﻿<div>
+        
+        
+        <script>
+            $(function() {
+            $( "#tabs" ).tabs();
+            });
+        </script>
+        <script>
+            // HIDING UNWANTED STUFF ON PAGE
+            $( document ).ready(function() {
+            $("#page-title").hide();
+
+
+            });
+        </script>
+        <script>
+            setInterval(function(){
+            $('#list').find('iframe').contents().find('#description').hide();
+            result = $('#list').find('iframe').contents().find('#pager').find('.slick-pager-status').text().replace(/[^0-9]/g, '');
+            $('#result').html('Currently displayed OGC services: ' + result );
+            stat1 = $('#list').find('iframe').contents().find('#d1').text();
+            stat2 = $('#list').find('iframe').contents().find('#d2').text();
+            stat3= $('#list').find('iframe').contents().find('#d3').text();
+            stat4 = $('#list').find('iframe').contents().find('#d4').text();
+            stat5 = $('#list').find('iframe').contents().find('#d5').text();
+            //PRINT IT TO HTML
+            $('#stat1').html(stat1);
+            $('#stat2').html(stat2);
+            $('#stat3').html(stat3);
+            $('#stat4').html(stat4);
+            $('#stat5').html(stat5);
+            },1000);
+        </script>
+
+
+<script>
+            //IFRAME IS LOADED
+            $(function(){
+            $('#list').find('iframe').contents().find('#description').on("load", function(){
+            $(this).show();
+            console.log ('IFRAME LOADED');
+            });
+            });
+        </script>
+        <div id="tabs">
+            <ul>
+                <li id="htmllisttab">
+                    <a href="#tabs-1">HTML List of OGC services</a>
+                </li>
+                <li id="cswtab">
+                    <a href="#tabs-2">CSW Services for OGC resources metadata</a>
+                </li>
+                <li id="maptab">
+                    <a href="#tabs-3">Geo Portal of OGC resources</a>
+                </li>
+            </ul>
+
+
+            <div id="tabs-1">
+                <div id="desc-list">
+                    <p>This page provides a list of OGC Web Services that have been discovered on Google Search Engine from October 2013. It represents a simple tabular view on the database implemented underneath the OGC Crawler being developed. Information as the OGC Service type, version, the location of the server where the service runs, the date when the service was discovered on Google, date when it's availability has been checked last and finally its status after the last check are available. You can filter by "Free text" way each column. E.g. you can filter OGC service type typing WFS in the type column, to restrict version.</p>
+                    <p>
+                        <b>Basic statistics:</b>
+                        <br />
+                        <text id="stat1"/>
+                        <br />
+                        <text id="stat2"/>
+                        <br />
+                        <text id="stat3"/>
+                        <br />
+                        <text id="stat4"/>
+                        <br />
+                        <text id="stat5"/>
+                    </p>
+                </div>
+
+
+                <div>
+                    <text id="result"></text>
+
+
+                    <div id="list">
+                        <iframe height="600px" name="ogcwxs_list" src="/ogcwxs/html/" width="100%"/>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div id="desc-catalog">
+                    <p>The Catalogue Services for Web (CSW) have been implemented using the <a href="http://pycsw.org/" target="_blank">pycsw</a> an opensource OGC CSW server implementation written in Python. The metadata made available through the CSW services are collected by harvesting the OGC services endpoints collected by the metasearch crawler.</p>
+                    <p>The following CSW services are available:</p>
+                    <ul>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_wms" target="_blank">CSW for metadata harvested from Web Map Services (WMS)</a><br><text id="statwms"/><br></li>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_wfs" target="_blank">CSW for metadata harvested from Web Feature Services (WFS) </a><br><text id="statwfs"/><br></li>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_wcs" target="_blank">CSW for metadata harvested from Web Coverage Services (WCS) </a><br><text id="statwcs"/><br></li>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_wps" target="_blank">CSW for metadata harvested from Web Processing Services (WPS) </a><br><text id="statwps"/><br></li>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_sos" target="_blank">CSW for metadata harvested from Sensor Observation Services (SOS) </a><br><text id="statsos"/><br></li>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_wmts" target="_blank">CSW for metadata harvested from Web Map Tile Services (WMTS) </a><br><text id="statwmts"/><br></li>
+                        <li><a href="https://bolegweb.geof.unizg.hr/pycsw_csw" target="_blank">CSW for metadata harvested from Catalogue Services for Web (CSW) </a><br><text id="statcsw"/><br></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="tabs-3">
+                <div id="desc-portal">
+                    <p>The Geospatial portal provides a graphic user interface to search metadata of OGC resources discovered on Google SE by MetaSearch Enhanced Geo Crawler. Simple full text and spatial queries by defining the location on the map (doubleclick) and map extend (boundingbox) are provided. This pilot is in the development phase and foresees to provide more advanced functionailities in the future for consuming the geospatial data discovered on the Web.</p>
+                </div>
+                <div id="portal">
+                    <iframe height="620px" name="ogcwxs_portal" src="/ogcwxs/portal/" width="100%" id="iframeportal"/>
+                </div>
+            </div>
+        </div>
+        <script>
+    var xml = null;
+        function reload() {
+                document.getElementById('iframeportal').src += '';
+            } maptab.onclick = reload;
+        </script>
+            <script>
+            function escapeElementName(str) {
+                    return str.replace(':', '\\:').replace('.', '\\.');
+                }
+            function query (){
+                    $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_wms',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statwms').html('Metadata available: ' + matched);
+                        }
+                    });
+                            $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_wfs',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statwfs').html('Metadata available: ' + matched);
+                        }
+                    });
+                            $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_wcs',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statwcs').html('Metadata available: ' + matched);
+                        }
+                    });
+                            $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_wps',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statwps').html('Metadata available: ' + matched);
+                        }
+                    });
+                            $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_sos',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statsos').html('Metadata available: ' + matched);
+                        }
+                    });
+                            $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_wmts',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statwmts').html('Metadata available: ' + matched);
+                        }
+                    });
+                            $.ajax({
+                        type: "post",
+                        url: 'https://bolegweb.geof.unizg.hr/pycsw_csw',
+                        contentType: "text/xml",
+                        data: '<csw:GetRecords xmlns:csw="http://www.opengis.net/cat/csw/2.0.2" xmlns:gmd="http://www.isotc211.org/2005/gmd" service="CSW" version="2.0.2" resultType="hits" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/cat/csw/2.0.2 http://schemas.opengis.net/csw/2.0.2/CSW-discovery.xsd"><csw:DistributedSearch/><csw:Query typeNames="gmd:MD_Metadata"><csw:ElementSetName>brief<\/csw:ElementSetName><\/csw:Query><\/csw:GetRecords>',
+                        dataType: "text",
+                        success: function(xml) {
+                            var matched = parseInt($(xml).find(escapeElementName('csw:SearchResults')).attr('numberOfRecordsMatched'));
+                                            $('#statcsw').html('Metadata available: ' + matched);
+                        }
+                    });
+            }
+    cswtab.onclick = query;            
+    </script>
+</div>
