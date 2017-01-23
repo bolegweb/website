@@ -1,2 +1,2 @@
-# HTML pages
-HTML + JavaScript codes used in the [project web site](https://bolegweb.geof.unizg.hr)    
+# Project web site pages
+HTML, JavaScript and PHP codes used in the [project web site](https://bolegweb.geof.unizg.hr) pages.    
